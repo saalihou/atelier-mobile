@@ -9,6 +9,7 @@
   "rules": {
     "react/jsx-filename-extension": "off",
     "no-use-before-define": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/sort-comp": "off"
   }
 }
