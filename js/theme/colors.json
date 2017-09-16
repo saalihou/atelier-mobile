@@ -1,4 +1,5 @@
 {
   "PRIMARY": "white",
-  "PRIMARY_FOREGROUND": "#F14232"
+  "PRIMARY_FOREGROUND": "darkgrey",
+  "ACCENT": "#F14232"
 }

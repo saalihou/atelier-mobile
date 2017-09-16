@@ -15,7 +15,7 @@ export default function screen(WrappedComponent: React.ComponentType<>): ScreenT
     render() {
       return (
         <View style={styles.container}>
-          <StatusBar backgroundColor={colors.PRIMARY_FOREGROUND} barStyle="light-content" />
+          <StatusBar backgroundColor={colors.ACCENT} barStyle="light-content" />
           <WrappedComponent {...this.props} />
         </View>
       );
@@ -32,7 +32,7 @@ export default function screen(WrappedComponent: React.ComponentType<>): ScreenT
       headerStyle: {
         backgroundColor: colors.PRIMARY,
       },
-      headerTintColor: colors.PRIMARY_FOREGROUND,
+      headerTintColor: colors.ACCENT,
       headerTitleStyle: {
         textAlign: 'center',
         alignSelf: 'center',
