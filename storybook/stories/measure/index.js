@@ -1,0 +1,1 @@
+require('./Mannequin.story');
