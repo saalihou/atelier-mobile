@@ -37,7 +37,6 @@ export default function screen(WrappedComponent: React.ComponentType<>): ScreenT
         textAlign: 'center',
         alignSelf: 'center',
       },
-      headerLeft: <View />,
       headerRight: <View />, // we do this to make sure title is centered no matter what, see https://github.com/react-community/react-navigation/issues/544#issuecomment-298618209
     };
 
