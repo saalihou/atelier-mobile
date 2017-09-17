@@ -17,10 +17,6 @@ export type ButtonProps = {
 class Button extends Component {
   props: ButtonProps;
 
-  state = {
-    pressed: false,
-  };
-
   static defaultProps = {
     disabled: false,
     onPressIn: () => undefined,
@@ -30,29 +26,13 @@ class Button extends Component {
   };
 
   render() {
-    const { label, onPressIn, onPressOut, ...props } = this.props;
-    const { pressed } = this.state;
+    const { label, ...props } = this.props;
     return (
       <Ripple
-        style={[
-          styles.container,
-          { backgroundColor: pressed ? colors.ACCENT_DARK : colors.ACCENT },
-        ]}
+        style={styles.container}
         rippleColor={colors.PRIMARY}
         rippleOpacity={0.5}
         rippleDuration={500}
-        onPressIn={() => {
-          this.setState({ pressed: true });
-          if (onPressIn) {
-            onPressIn();
-          }
-        }}
-        onPressOut={() => {
-          this.setState({ pressed: false });
-          if (onPressOut) {
-            onPressOut();
-          }
-        }}
         {...props}
       >
         <Text style={styles.text}>{label}</Text>
