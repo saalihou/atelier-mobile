@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    color: colors.ACCENT,
+    color: colors.PRIMARY_FOREGROUND,
     fontSize: 20,
     fontWeight: 'bold',
   },
