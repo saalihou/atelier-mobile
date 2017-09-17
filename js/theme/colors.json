@@ -1,5 +1,6 @@
 {
   "PRIMARY": "white",
   "PRIMARY_FOREGROUND": "darkgrey",
-  "ACCENT": "#F14232"
+  "ACCENT": "#F14232",
+  "ACCENT_FADED": "rgba(241, 66, 50, 0.5)"
 }
