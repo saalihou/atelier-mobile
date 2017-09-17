@@ -8,12 +8,13 @@ import colors from '../theme/colors.json';
 
 export type InputProps = {
   icon?: string,
+  name?: string
 } & TextInputProperties;
 
 class Input extends Component {
   props: InputProps;
   render() {
-    const { icon, style, ...props } = this.props;
+    const { icon, style, name, ...props } = this.props;
     return (
       <View style={styles.container}>
         {icon && <Icon name={icon} color={colors.ACCENT} size={40} style={styles.icon} />}
