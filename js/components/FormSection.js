@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { autobind } from 'core-decorators';
-import { isUndefined } from 'lodash';
+import { isUndefined, find } from 'lodash';
+import validate from 'validate.js';
 
 import Input from './Input';
 import Button from './Button';
@@ -10,9 +11,10 @@ import type { InputProps } from './Input';
 
 export type FormSectionProps = {
   children: any,
+  validators: Object,
   submitLabel: string,
-  onChange?: (values: Object) => void,
-  onSubmit?: (values: Object) => void,
+  onChange: (values: Object) => void,
+  onSubmit: (values: Object) => void,
 };
 
 @autobind
@@ -22,25 +24,35 @@ class FormSection extends Component {
   static defaultProps = {
     onChange: () => undefined,
     onSubmit: () => undefined,
+    validators: {},
   };
 
-  state: {
+  state = {
     values: {},
+    errors: {},
+    touched: {},
   };
 
   constructor(props: FormSectionProps) {
     super(props);
     this.state = {
       values: {},
+      errors: {},
+      touched: {},
     };
     React.Children.forEach(props.children, (c) => {
-      this.state.values[c.props.name] = !isUndefined(c.props.value)
-        ? c.props.value
-        : c.props.defaultValue;
+      const inputName = c.props.name;
+      const inputValue = !isUndefined(c.props.value) ? c.props.value : c.props.defaultValue;
+      this.state.values[inputName] = inputValue;
+      this.state.errors[inputName] =
+        validate.single(inputValue, props.validators[inputName], {
+          format: 'flat',
+        }) || [];
     });
   }
 
   onChange(name: string, value: string) {
+    this.validate(name, value);
     this.setState(
       {
         values: {
@@ -62,7 +74,34 @@ class FormSection extends Component {
     }
   }
 
+  validate(name: string, value: string) {
+    if (!this.props.validators) {
+      return;
+    }
+    const validator = this.props.validators[name];
+    if (!validator) {
+      return;
+    }
+    const errors = validate.single(value, validator, { format: 'flat' }) || [];
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        [name]: errors,
+      },
+    });
+  }
+
+  onBlur(name: string) {
+    this.setState({
+      touched: {
+        ...this.state.touched,
+        [name]: true,
+      },
+    });
+  }
+
   renderInput(e: React.Element<typeof Input>) {
+    const { errors, touched } = this.state;
     const additionalProps: InputProps = {
       onChangeText: (value) => {
         this.onChange(e.props.name, value);
@@ -70,17 +109,29 @@ class FormSection extends Component {
           e.props.onChangeText(value);
         }
       },
+      onBlur: () => {
+        this.onBlur(e.props.name);
+        if (e.props.onBlur) {
+          e.props.onBlur();
+        }
+      },
+      error: touched[e.props.name] && errors[e.props.name][0],
     };
     return React.cloneElement(e, additionalProps);
   }
 
   render() {
     const { children, submitLabel } = this.props;
+    const { errors } = this.state;
     return (
       <View>
         {React.Children.map(children, e => this.renderInput(e))}
         <View style={styles.submitContainer}>
-          <Button onPress={() => this.onSubmit()} label={submitLabel} />
+          <Button
+            disabled={!!find(errors, v => v.length !== 0)}
+            onPress={() => this.onSubmit()}
+            label={submitLabel}
+          />
         </View>
       </View>
     );

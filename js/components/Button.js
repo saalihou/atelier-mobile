@@ -26,13 +26,14 @@ class Button extends Component {
   };
 
   render() {
-    const { label, ...props } = this.props;
+    const { label, disabled, ...props } = this.props;
     return (
       <Ripple
-        style={styles.container}
+        style={[styles.container, disabled && { backgroundColor: colors.INACTIVE }]}
         rippleColor={colors.PRIMARY}
         rippleOpacity={0.5}
         rippleDuration={500}
+        disabled={disabled}
         {...props}
       >
         <Text style={styles.text}>{label}</Text>
