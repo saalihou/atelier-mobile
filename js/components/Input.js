@@ -17,14 +17,19 @@ class Input extends Component {
   render() {
     const { icon, style, name, error, ...props } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, !props.multiline && { height: 60 }]}>
         {icon && <Icon name={icon} color={colors.ACCENT} size={40} style={styles.icon} />}
         {error && <Text style={styles.errorMessage}>{error}</Text>}
         <TextInput
           underlineColorAndroid={colors.ACCENT}
           selectionColor={colors.ACCENT_FADED}
           placeholderTextColor={colors.ACCENT_FADED}
-          style={[styles.input, icon && styles.inputWithIcon, style]}
+          style={[
+            styles.input,
+            icon && styles.inputWithIcon,
+            !props.multiline && { flex: 1 },
+            style,
+          ]}
           {...props}
         />
         {error && <Icon name="warning" color={colors.DANGER} size={30} style={styles.errorIcon} />}
@@ -34,11 +39,8 @@ class Input extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: 60,
-  },
+  container: {},
   input: {
-    flex: 1,
     color: colors.PRIMARY_FOREGROUND,
     fontSize: 20,
     fontWeight: 'bold',
