@@ -5983,6 +5983,10 @@ react-native-tab-view@^0.0.65:
   dependencies:
     prop-types "^15.5.8"
 
+react-native-tabbed-view-pager-android@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-tabbed-view-pager-android/-/react-native-tabbed-view-pager-android-1.0.3.tgz#2e54667ca2a2d394755235c0260d1a8ca74485c4"
+
 react-native-vector-icons@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.4.0.tgz#cdfc1cd86ab495b2a4926bcec8f08c155475cbf1"
