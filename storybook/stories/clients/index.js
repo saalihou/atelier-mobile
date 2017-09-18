@@ -1,0 +1,1 @@
+require('./ContactList.story');
