@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   container: {},
   input: {
     color: colors.PRIMARY_FOREGROUND,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   inputWithIcon: {
