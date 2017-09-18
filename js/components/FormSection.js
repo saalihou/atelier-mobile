@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { autobind } from 'core-decorators';
-import { isUndefined, find } from 'lodash';
+import { isUndefined, find, set, clone } from 'lodash';
 import validate from 'validate.js';
 
 import Input from './Input';
@@ -43,7 +43,7 @@ class FormSection extends Component {
     React.Children.forEach(props.children, (c) => {
       const inputName = c.props.name;
       const inputValue = !isUndefined(c.props.value) ? c.props.value : c.props.defaultValue;
-      this.state.values[inputName] = inputValue;
+      set(this.state.values, inputName, inputValue);
       this.state.errors[inputName] =
         validate.single(inputValue, props.validators[inputName], {
           format: 'flat',
@@ -53,12 +53,11 @@ class FormSection extends Component {
 
   onChange(name: string, value: string) {
     this.validate(name, value);
+    const newValues = clone(this.state.values);
+    set(newValues, name, value);
     this.setState(
       {
-        values: {
-          ...this.state.values,
-          [name]: value,
-        },
+        values: newValues,
       },
       () => {
         if (this.props.onChange) {

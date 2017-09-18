@@ -61,4 +61,16 @@ storiesOf('FormSection', module)
       <Input name="name" icon="people" autoCapitalize="words" />
       <Input name="password" icon="lock" secureTextEntry />
     </FormSection>
+  ))
+  .add('with nested values', () => (
+    <FormSection
+      submitLabel="Subscribe"
+      onChange={action('onChange')}
+      onSubmit={action('onSubmit')}
+      validators={{ 'client.name': { presence: true } }}
+    >
+      <Input name="client.phone" icon="phone" keyboardType="numeric" defaultValue="77" />
+      <Input name="client.name" icon="people" autoCapitalize="words" />
+      <Input name="credentials.password" icon="lock" secureTextEntry />
+    </FormSection>
   ));
