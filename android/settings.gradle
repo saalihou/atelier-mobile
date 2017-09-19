@@ -1,4 +1,6 @@
 rootProject.name = 'Atelier'
+include ':react-native-contacts'
+project(':react-native-contacts').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-contacts/android')
 include ':react-native-tabbed-view-pager-android'
 project(':react-native-tabbed-view-pager-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-tabbed-view-pager-android/android')
 include ':react-native-vector-icons'

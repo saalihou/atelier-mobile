@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationStackScreenOptions } from 'react-navigation';
 import ViewPager from 'react-native-tabbed-view-pager-android';
 
@@ -8,6 +8,7 @@ import Mannequin from '../components/measure/Mannequin';
 import FormSection from '../components/FormSection';
 import Input from '../components/Input';
 import colors from '../theme/colors.json';
+import { nameValidator, phoneValidator } from '../validators/measure/clientInfos';
 
 class TakeMeasures extends Component {
   static navigationOptions: NavigationStackScreenOptions = {
@@ -27,9 +28,17 @@ class TakeMeasures extends Component {
             <Mannequin />
           </View>
           <View style={styles.page}>
-            <FormSection submitLabel="Enregistrer">
-              <Input name="client" placeholder="Client" icon="person" />
-              <Input name="phone" placeholder="Téléphone" icon="phone" keyboardType="numeric" />
+            <FormSection
+              submitLabel="Enregistrer"
+              validators={{ 'client.name': nameValidator, 'client.phone': phoneValidator }}
+            >
+              <Input name="client.name" placeholder="Client" icon="person" />
+              <Input
+                name="client.phone"
+                placeholder="Téléphone"
+                icon="phone"
+                keyboardType="numeric"
+              />
               <Input
                 name="notes"
                 placeholder="Notes"
