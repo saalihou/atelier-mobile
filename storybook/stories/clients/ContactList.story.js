@@ -31,6 +31,7 @@ storiesOf('ContactList', module).add('with basic props', () => (
           phone: '775108144',
         },
       ]}
+      onSelect={c => alert(JSON.stringify(c, null, 2))}
     />
   </View>
 ));

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -5,18 +6,28 @@ import Ripple from 'react-native-material-ripple';
 
 import colors from '../../theme/colors.json';
 
-export type Contact = {
+type Contact = {
+  id: string,
   name: string,
   phone: string,
 };
 
+type ContactSelectCallback = (c: Contact) => void;
+
 export type ContactListProps = {
   data: Array<Contact>,
   loading: boolean,
+  onSelect: ContactSelectCallback,
 };
 
-const ContactListItem = ({ contact }: { contact: Contact }) => (
-  <Ripple style={itemStyles.container} rippleDuration={600}>
+const ContactListItem = ({
+  contact,
+  onPress,
+}: {
+  contact: Contact,
+  onPress: ContactSelectCallback,
+}) => (
+  <Ripple style={itemStyles.container} rippleDuration={600} onPress={() => onPress(contact)}>
     <Icon name="person" size={24} color={colors.PRIMARY_FOREGROUND} />
     <View style={itemStyles.infos}>
       <Text style={[itemStyles.infoText, itemStyles.name]}>{contact.name}</Text>
@@ -27,13 +38,14 @@ const ContactListItem = ({ contact }: { contact: Contact }) => (
 
 class ContactList extends Component<ContactListProps> {
   render() {
-    const { data, loading } = this.props;
+    const { data, loading, onSelect } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
           data={data}
-          renderItem={({ item }) => <ContactListItem contact={item} />}
+          renderItem={({ item }) => <ContactListItem contact={item} onPress={onSelect} />}
           keyExtractor={c => c.id}
+          initialNumToRender={50}
         />
       </View>
     );
