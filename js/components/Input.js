@@ -12,8 +12,7 @@ export type InputProps = {
   error?: string,
 } & TextInputProperties;
 
-class Input extends Component {
-  props: InputProps;
+class Input extends Component<InputProps> {
   render() {
     const { icon, style, name, error, ...props } = this.props;
     return (

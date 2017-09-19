@@ -14,9 +14,7 @@ export type ButtonProps = {
   onLongPress?: () => void,
 };
 
-class Button extends Component {
-  props: ButtonProps;
-
+class Button extends Component<ButtonProps> {
   static defaultProps = {
     disabled: false,
     onPressIn: () => undefined,

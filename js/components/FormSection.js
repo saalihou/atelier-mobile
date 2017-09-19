@@ -18,9 +18,7 @@ export type FormSectionProps = {
 };
 
 @autobind
-class FormSection extends Component {
-  props: FormSectionProps;
-
+class FormSection extends Component<FormSectionProps, $FlowFixMeState> {
   static defaultProps = {
     onChange: () => undefined,
     onSubmit: () => undefined,
@@ -99,7 +97,7 @@ class FormSection extends Component {
     });
   }
 
-  renderInput(e: React.Element<typeof Input>) {
+  renderInput(e: React.Element<React.ComponentType<typeof Input>>) {
     const { errors, touched } = this.state;
     const additionalProps: InputProps = {
       onChangeText: (value) => {

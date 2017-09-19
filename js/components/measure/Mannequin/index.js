@@ -21,9 +21,7 @@ export type MannequinProps = {
 };
 
 @autobind
-class Mannequin extends Component {
-  props: MannequinProps;
-
+class Mannequin extends Component<MannequinProps, MannequinState> {
   static defaultProps = {
     initialMesurements: {},
     onChange: () => undefined,
