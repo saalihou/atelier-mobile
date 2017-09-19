@@ -16,7 +16,7 @@ export type ContactListProps = {
 };
 
 const ContactListItem = ({ contact }: { contact: Contact }) => (
-  <Ripple style={itemStyles.container} rippleDuration={600} >
+  <Ripple style={itemStyles.container} rippleDuration={600}>
     <Icon name="person" size={24} color={colors.PRIMARY_FOREGROUND} />
     <View style={itemStyles.infos}>
       <Text style={[itemStyles.infoText, itemStyles.name]}>{contact.name}</Text>
@@ -25,9 +25,7 @@ const ContactListItem = ({ contact }: { contact: Contact }) => (
   </Ripple>
 );
 
-class ContactList extends Component {
-  props: ContactListProps;
-
+class ContactList extends Component<ContactListProps> {
   render() {
     const { data, loading } = this.props;
     return (
