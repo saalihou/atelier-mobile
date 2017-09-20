@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { autobind } from 'core-decorators';
-import { isUndefined, find, set, clone } from 'lodash';
+import { isUndefined, find, set, get, clone } from 'lodash';
 import validate from 'validate.js';
 
 import Input from './Input';
@@ -18,7 +18,7 @@ export type FormSectionProps = {
 };
 
 @autobind
-class FormSection extends Component<FormSectionProps, $FlowFixMeState> {
+class FormSection extends PureComponent<FormSectionProps, {}> {
   static defaultProps = {
     onChange: () => undefined,
     onSubmit: () => undefined,
@@ -49,20 +49,30 @@ class FormSection extends Component<FormSectionProps, $FlowFixMeState> {
     });
   }
 
-  onChange(name: string, value: string) {
+  componentWillReceiveProps(nextProps) {
+    React.Children.map(nextProps.children, (c) => {
+      if (!c) {
+        return;
+      }
+      const { name, value } = c.props;
+      const currentValue = get(this.state.values, name);
+      if (value === currentValue) {
+        return;
+      }
+      this.onChange(name, value, false);
+    });
+  }
+
+  onChange(name: string, value: string, notifyParent: boolean = true) {
     this.validate(name, value);
     const newValues = clone(this.state.values);
     set(newValues, name, value);
-    this.setState(
-      {
-        values: newValues,
-      },
-      () => {
-        if (this.props.onChange) {
-          this.props.onChange(this.state.values);
-        }
-      },
-    );
+    this.setState({
+      values: newValues,
+    });
+    if (notifyParent && this.props.onChange) {
+      this.props.onChange(newValues);
+    }
   }
 
   onSubmit() {
@@ -98,6 +108,9 @@ class FormSection extends Component<FormSectionProps, $FlowFixMeState> {
   }
 
   renderInput(e: React.Element<React.ComponentType<typeof Input>>) {
+    if (!e) {
+      return e;
+    }
     const { errors, touched } = this.state;
     const additionalProps: InputProps = {
       onChangeText: (value) => {
