@@ -14,6 +14,7 @@
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.3",
     "react-native-contacts": "^1.0.2",
+    "react-native-image-picker": "^0.26.7",
     "react-native-material-ripple": "^0.7.5",
     "react-native-tabbed-view-pager-android": "^1.0.3",
     "react-native-vector-icons": "^4.4.0",
