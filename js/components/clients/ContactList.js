@@ -6,13 +6,13 @@ import Ripple from 'react-native-material-ripple';
 
 import colors from '../../theme/colors.json';
 
-type Contact = {
+export type Contact = {
   id: string,
   name: string,
   phone: string,
 };
 
-type ContactSelectCallback = (c: Contact) => void;
+export type ContactSelectCallback = (c: Contact) => void;
 
 export type ContactListProps = {
   data: Array<Contact>,
