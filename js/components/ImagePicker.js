@@ -19,12 +19,9 @@ class ImagePicker extends Component<ImagePickerProps> {
             <Image source={{ uri: pickedImage }} resizeMode="cover" style={styles.image} />
           </View>
         )}
-        <Icon
-          name={pickedImage ? 'edit' : 'add-a-photo'}
-          size={pickedImage ? 40 : 50}
-          color={colors.ACCENT}
-          style={pickedImage ? styles.pickedImageIcon : styles.icon}
-        />
+        {!pickedImage && (
+          <Icon name="add-a-photo" size={50} color={colors.ACCENT} style={styles.icon} />
+        )}
       </TouchableOpacity>
     );
   }
