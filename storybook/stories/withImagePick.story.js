@@ -12,6 +12,6 @@ const ImagePickerContainer = withImagePick()(ImagePicker);
 
 storiesOf('withImagePick', module)
   .addDecorator(getStory => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>{getStory()}</View>
+    <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>{getStory()}</View>
   ))
   .add('with basic props', () => <ImagePickerContainer onPick={action('onPick')} />);

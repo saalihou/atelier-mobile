@@ -2,19 +2,21 @@
 import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 import { Alert } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 export type WithImagePickProps = {
-  onPick: (path: string) => void,
+  onPick: (pickedImages: Array<string>) => void,
 };
 
 type WithImagePickState = {
-  pickedImage?: string,
+  pickedImages: Array<string>,
 };
 
+type MediaOrigin = 'camera' | 'library';
+
 type ImagePickerProps = {
-  onPickRequest: () => void,
-  pickedImage?: string,
+  onPickRequest: (o: MediaOrigin) => any,
+  pickedImages: Array<string>,
 };
 
 export default function withImagePick(): (
@@ -23,35 +25,28 @@ export default function withImagePick(): (
   return (Picker) => {
     class Wrapper extends Component<WithImagePickProps, WithImagePickState> {
       state = {
-        pickedImage: undefined,
+        pickedImages: [],
       };
 
-      pick(): void {
-        ImagePicker.launchImageLibrary(
-          {
-            mediaType: 'photo',
-            maxWidth: 1200,
-            maxHeight: 1200,
-            quality: 1,
-          },
-          (response) => {
-            if (response.didCancel) {
-              return;
-            }
-            if (response.error) {
-              Alert.alert('Erreur', response.error);
-            }
-            this.setState({
-              pickedImage: response.uri,
-            });
-            this.props.onPick(response.uri);
-          },
-        );
+      async pick(origin: MediaOrigin): Promise<void> {
+        const pickMethod = origin === 'library' ? 'openPicker' : 'openCamera';
+        const images = await ImagePicker[pickMethod]({
+          multiple: true,
+          compressImageMaxWidth: 1200,
+          compressImageMaxHeight: 1200,
+          compressImageQuality: 1,
+          mediaType: 'photo',
+        });
+        const pickedImages = this.state.pickedImages.concat(images.map(i => i.path));
+        this.setState({
+          pickedImages,
+        });
+        this.props.onPick(pickedImages);
       }
 
       render() {
-        const { pickedImage } = this.state;
-        return <Picker pickedImage={pickedImage} onPickRequest={() => this.pick()} />;
+        const { pickedImages } = this.state;
+        return <Picker pickedImages={pickedImages} onPickRequest={origin => this.pick(origin)} />;
       }
     }
 

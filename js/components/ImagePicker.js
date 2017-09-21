@@ -1,39 +1,65 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, ScrollView, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import colors from '../theme/colors.json';
 
+type MediaOrigin = 'camera' | 'library';
+
 export type ImagePickerProps = {
-  pickedImage: string,
-  onPickRequest: () => void,
+  pickedImages: Array<string>,
+  onPickRequest: (o: MediaOrigin) => any,
 };
 
 class ImagePicker extends Component<ImagePickerProps> {
+  static defaultProps = {
+    pickedImages: [],
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.pickedImages.length !== this.props.pickedImages.length) {
+      setTimeout(() => {
+        this.imagesContainer.scrollToEnd();
+      });
+    }
+  };
+
   render() {
-    const { onPickRequest, pickedImage } = this.props;
+    const { onPickRequest, pickedImages } = this.props;
     return (
-      <TouchableOpacity style={styles.container} onPress={onPickRequest}>
-        {pickedImage && (
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: pickedImage }} resizeMode="cover" style={styles.image} />
-          </View>
-        )}
-        {!pickedImage && (
-          <Icon name="add-a-photo" size={50} color={colors.ACCENT} style={styles.icon} />
-        )}
-      </TouchableOpacity>
+      <View style={styles.container} onPress={onPickRequest}>
+        <ScrollView
+          horizontal
+          ref={(ref) => {
+            this.imagesContainer = ref;
+          }}
+        >
+          {pickedImages.map(imageUri => (
+            <View style={styles.imageContainer} key={imageUri}>
+              <Image source={{ uri: imageUri }} resizeMode="cover" style={styles.image} />
+            </View>
+          ))}
+        </ScrollView>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity onPress={() => onPickRequest('camera')}>
+            <Icon name="add-a-photo" size={50} color={colors.ACCENT} style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onPickRequest('library')}>
+            <Icon name="photo-library" size={50} color={colors.ACCENT} style={styles.icon} />
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
+  container: {},
   imageContainer: {
     width: 150,
     height: 150,
+    borderRightColor: colors.PRIMARY,
+    borderRightWidth: 2,
   },
   image: {
     flex: 1,
@@ -43,6 +69,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: 0,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 
