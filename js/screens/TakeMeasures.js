@@ -9,6 +9,7 @@ import Mannequin from '../components/measure/Mannequin';
 import FormSection from '../components/FormSection';
 import ContactList, { type Contact } from '../components/clients/ContactList';
 import withContactSearch from '../hoc/clients/withContactSearch';
+import ImagePicker from '../containers/ImagePicker';
 import Input from '../components/Input';
 import colors from '../theme/colors.json';
 import { nameValidator, phoneValidator } from '../validators/measure/clientInfos';
@@ -33,6 +34,7 @@ class TakeMeasures extends PureComponent {
       },
       notes: '',
     },
+    images: [],
     displayContactSearch: true,
   };
 
@@ -97,6 +99,7 @@ class TakeMeasures extends PureComponent {
                   autoCapitalize="sentences"
                   style={{ fontSize: 16 }}
                 />
+                <ImagePicker onPick={images => this.setState({ images })} />
               </FormSection>
             </ScrollView>
           </View>
