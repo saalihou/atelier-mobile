@@ -29,19 +29,23 @@ export default function withImagePick(): (
       };
 
       async pick(origin: MediaOrigin): Promise<void> {
-        const pickMethod = origin === 'library' ? 'openPicker' : 'openCamera';
-        const images = await ImagePicker[pickMethod]({
-          multiple: true,
-          compressImageMaxWidth: 1200,
-          compressImageMaxHeight: 1200,
-          compressImageQuality: 1,
-          mediaType: 'photo',
-        });
-        const pickedImages = this.state.pickedImages.concat(images.map(i => i.path));
-        this.setState({
-          pickedImages,
-        });
-        this.props.onPick(pickedImages);
+        try {
+          const pickMethod = origin === 'library' ? 'openPicker' : 'openCamera';
+          const images = await ImagePicker[pickMethod]({
+            multiple: true,
+            compressImageMaxWidth: 1200,
+            compressImageMaxHeight: 1200,
+            compressImageQuality: 1,
+            mediaType: 'photo',
+          });
+          const pickedImages = this.state.pickedImages.concat(images.map(i => i.path));
+          this.setState({
+            pickedImages,
+          });
+          this.props.onPick(pickedImages);
+        } catch (e) {
+          console.warn(e);
+        }
       }
 
       render() {
