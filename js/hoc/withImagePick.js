@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 import { Alert } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import Chance from 'chance';
+import Promise from 'bluebird';
+import fs from 'react-native-fs';
+import path from 'path';
 
 export type WithImagePickProps = {
   onPick: (pickedImages: Array<string>) => void,
@@ -18,6 +22,8 @@ type ImagePickerProps = {
   onPickRequest: (o: MediaOrigin) => any,
   pickedImages: Array<string>,
 };
+
+const chance = new Chance();
 
 export default function withImagePick(): (
   ComponentType<ImagePickerProps>,
@@ -38,7 +44,16 @@ export default function withImagePick(): (
             compressImageQuality: 1,
             mediaType: 'photo',
           });
-          const pickedImages = this.state.pickedImages.concat(images.map(i => i.path));
+          const movedImages = await Promise.map(images, async (image) => {
+            const hash = chance.hash();
+            const srcPath = image.path.replace('file://', '');
+            const destDir = `${fs.MainBundlePath || fs.DocumentDirectoryPath}/Images`;
+            await fs.mkdir(destDir);
+            const destPath = `${destDir}/${hash}${path.extname(srcPath)}`;
+            await fs.copyFile(srcPath, destPath);
+            return { ...image, path: `file://${destPath}` };
+          });
+          const pickedImages = this.state.pickedImages.concat(movedImages.map(i => i.path));
           this.setState({
             pickedImages,
           });

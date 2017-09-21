@@ -3,6 +3,7 @@ package com.atelier;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import is.uncommon.rn.widgets.TabbedViewPagerAndroidPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
             new PickerPackage(),
             new ReactNativeContacts(),
             new TabbedViewPagerAndroidPackage(),
