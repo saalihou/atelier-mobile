@@ -72,7 +72,11 @@ class Mannequin extends Component<MannequinProps, MannequinState> {
     const { containerLayout, measurements } = this.state;
     return (
       <View style={styles.container} onLayout={e => this.onLayout(e, defaultMeasurement)}>
-        <Image style={{ flex: 1 }} source={defaultMeasurement.image} resizeMode="center" />
+        <Image
+          style={styles.mannequinImage}
+          source={defaultMeasurement.image}
+          resizeMode="contain"
+        />
         {defaultMeasurement.spots.map(spot => (
           <Spot
             key={spot.name}
@@ -91,6 +95,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+  },
+  mannequinImage: {
+    flex: 1,
+    borderColor: 'orange',
+    borderBottomWidth: 2,
+    opacity: 0.5,
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { isString } from 'lodash';
 
 import colors from '../../../theme/colors.json';
@@ -41,26 +41,41 @@ class Spot extends Component {
 
   render() {
     const { props } = this;
-    const [x, y, w, h] = [props.x, props.y, props.w, props.h].map(prcnt);
+    const [x, y, w] = [props.x, props.y, props.w].map(prcnt);
     const { rotate, containerLayout: layout, value, onChange } = this.props;
     const width = (w || SPOT_SIZE) * layout.width;
-    const height = (h || w || SPOT_SIZE) * layout.width;
+    const height = 30;
     const left = x * layout.width - width / 2 + layout.x;
-    const top = y * layout.height - height / 2 + layout.y;
-    const borderRadius = width / 2;
+    const top = y * layout.height - height;
+    const rotateValue = rotate ? parseFloat(rotate.replace('deg', '')) : 0;
+    const inputRotate = rotateValue > 45 || rotateValue < -45 ? -rotateValue : 0;
     return (
       <View
         style={[
           styles.container,
-          { left, top, width, height, borderRadius, transform: [{ rotateZ: rotate || '0deg' }] },
+          { left, top, width, height, transform: [{ rotateZ: `${rotateValue}deg` }] },
         ]}
       >
+        <TouchableOpacity
+          onPressIn={() => this.input.focus()}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            zIndex: 10,
+          }}
+        />
         <TextInput
           keyboardType="numeric"
-          style={styles.input}
+          style={[styles.input, { transform: [{ rotateZ: `${inputRotate}deg` }] }]}
           underlineColorAndroid="rgba(0, 0, 0, 0)"
           value={String(value)}
           onChangeText={newValue => onChange(parseInt(newValue, 10))}
+          ref={(ref) => {
+            this.input = ref;
+          }}
         />
       </View>
     );
@@ -70,17 +85,22 @@ class Spot extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    backgroundColor: colors.ACCENT,
+    borderBottomColor: colors.ACCENT,
+    borderBottomWidth: 3,
     opacity: 0.8,
   },
   input: {
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 15,
     padding: 0,
     margin: 0,
+    paddingBottom: 0,
+    marginBottom: 0,
     flex: 1,
-    color: colors.PRIMARY,
+    color: colors.ACCENT,
+    textAlignVertical: 'bottom',
+    lineHeight: 15,
   },
 });
 
