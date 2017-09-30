@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
 
 import Measures from './screens/Measures';
 import TakeMeasures from './screens/TakeMeasures';
+
+import store from './store';
 
 const NavigatorApp = StackNavigator({
   Measures: { screen: Measures },
@@ -11,7 +14,11 @@ const NavigatorApp = StackNavigator({
 
 class Root extends Component {
   render() {
-    return <NavigatorApp />;
+    return (
+      <Provider store={store}>
+        <NavigatorApp />
+      </Provider>
+    );
   }
 }
 
