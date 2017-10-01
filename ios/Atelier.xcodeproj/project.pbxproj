@@ -52,6 +52,7 @@
 		FF0C4CB4126748E5A9C55BD6 /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ACA8723AD84D1B8956C0E6 /* libRCTContacts.a */; };
 		05527AA169EF46E08788F11C /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCEFD75CB484D2E9B0698D7 /* libimageCropPicker.a */; };
 		8808CA9EEB9A4302B98EF4DA /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C743587E68F949BD82B09250 /* libRNFS.a */; };
+		051A7D8347B041D5B707A02F /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CC11749C544923879FA0C6 /* libRNDeviceInfo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,6 +301,8 @@
 		DBCEFD75CB484D2E9B0698D7 /* libimageCropPicker.a */ = {isa = PBXFileReference; name = "libimageCropPicker.a"; path = "libimageCropPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		50CCFA407137458AAA8B3DA4 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C743587E68F949BD82B09250 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		40A59198B9354A89AE5F6DBE /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		29CC11749C544923879FA0C6 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +336,7 @@
 				FF0C4CB4126748E5A9C55BD6 /* libRCTContacts.a in Frameworks */,
 				05527AA169EF46E08788F11C /* libimageCropPicker.a in Frameworks */,
 				8808CA9EEB9A4302B98EF4DA /* libRNFS.a in Frameworks */,
+				051A7D8347B041D5B707A02F /* libRNDeviceInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +510,7 @@
 				7FA69C8941364B999099164D /* RCTContacts.xcodeproj */,
 				611C2D40DD37440A9295E198 /* imageCropPicker.xcodeproj */,
 				50CCFA407137458AAA8B3DA4 /* RNFS.xcodeproj */,
+				40A59198B9354A89AE5F6DBE /* RNDeviceInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1086,6 +1091,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1094,6 +1100,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1116,6 +1123,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1124,6 +1132,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1150,6 +1159,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1175,6 +1185,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1206,6 +1217,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,6 +1226,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Debug;
@@ -1245,6 +1258,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1253,6 +1267,7 @@
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 			};
 			name = Release;
@@ -1279,6 +1294,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1303,6 +1319,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

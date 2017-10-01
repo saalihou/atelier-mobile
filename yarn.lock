@@ -6062,6 +6062,14 @@ react-native-contacts@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-contacts/-/react-native-contacts-1.0.2.tgz#58b3b0572e3972a320c731ff639091b013a3c4b0"
 
+react-native-device-info@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.11.0.tgz#e96dd0e3f8a7d7e3022c1f441f51fa912fdc7444"
+
+"react-native-device-info@https://github.com/rebeccahughes/react-native-device-info.git":
+  version "0.11.0"
+  resolved "https://github.com/rebeccahughes/react-native-device-info.git#7179620593f701cbd85ef486ada947e3b092f239"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"

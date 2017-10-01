@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { NavigationStackScreenOptions } from 'react-navigation';
+import { NavigationStackScreenOptions, NavigationScreenProp } from 'react-navigation';
 import ViewPager from 'react-native-tabbed-view-pager-android';
 import { autobind } from 'core-decorators';
+import { connect } from 'react-redux';
 
 import screen from '../hoc/screen';
 import Mannequin from '../components/measure/Mannequin';
@@ -13,6 +14,7 @@ import ImagePicker from '../containers/ImagePicker';
 import Input from '../components/Input';
 import colors from '../theme/colors.json';
 import { nameValidator, phoneValidator } from '../validators/measure/clientInfos';
+import { saveMeasure, Measure } from '../actions/measure';
 
 const ContactSearchList = withContactSearch(c => ({
   id: c.recordID,
@@ -20,8 +22,14 @@ const ContactSearchList = withContactSearch(c => ({
   phone: c.phoneNumbers[0].number,
 }))(ContactList);
 
+type TakeMeasuresProps = {
+  saving: boolean,
+  saveMeasure: (m: Measure) => void,
+  navigation: NavigationScreenProp<{}, {}>,
+};
+
 @autobind
-class TakeMeasures extends PureComponent {
+class TakeMeasures extends PureComponent<TakeMeasuresProps> {
   static navigationOptions: NavigationStackScreenOptions = {
     headerTitle: 'Prendre mesures',
   };
@@ -34,9 +42,17 @@ class TakeMeasures extends PureComponent {
       },
       notes: '',
     },
+    values: {},
     images: [],
     displayContactSearch: true,
+    submitted: false,
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.submitted && nextProps.saving === false) {
+      this.props.navigation.goBack();
+    }
+  }
 
   onContactSelect(c: Contact) {
     this.setState(
@@ -53,6 +69,17 @@ class TakeMeasures extends PureComponent {
     );
   }
 
+  submit() {
+    this.setState({
+      submitted: true,
+    });
+    this.props.saveMeasure({
+      infos: this.state.infos,
+      values: this.state.values,
+      images: this.state.images,
+    });
+  }
+
   render() {
     const { infos, displayContactSearch } = this.state;
     return (
@@ -64,7 +91,7 @@ class TakeMeasures extends PureComponent {
           tabIndicatorColor={colors.ACCENT}
         >
           <View style={styles.page}>
-            <Mannequin />
+            <Mannequin onChange={values => this.setState({ values })} />
           </View>
           <View style={styles.page}>
             <ScrollView style={{ flex: 1 }}>
@@ -72,6 +99,7 @@ class TakeMeasures extends PureComponent {
                 submitLabel="Enregistrer"
                 validators={{ 'client.name': nameValidator, 'client.phone': phoneValidator }}
                 onChange={newInfos => this.setState({ infos: newInfos })}
+                onSubmit={this.submit}
               >
                 <Input
                   value={infos.client.name}
@@ -118,4 +146,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default screen(TakeMeasures);
+const mapStateToProps = state => ({
+  saving: state.measure.saving,
+});
+
+const mapDispatchToProps = dispatch => ({
+  saveMeasure: measure => dispatch(saveMeasure(measure)),
+});
+
+export default screen(connect(mapStateToProps, mapDispatchToProps)(TakeMeasures));

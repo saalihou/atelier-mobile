@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1043389544558",
+    "firebase_url": "https://atelier-5cda9.firebaseio.com",
+    "project_id": "atelier-5cda9",
+    "storage_bucket": "atelier-5cda9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043389544558:android:b05f12749d48299f",
+        "android_client_info": {
+          "package_name": "com.atelier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043389544558-r2q6pdq930cpaa09k7qm2fvmcad1avhi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.atelier",
+            "certificate_hash": "1d4dc413ea9d669240c2204940f9182d8abc0965"
+          }
+        },
+        {
+          "client_id": "1043389544558-3gd3rkh1og0a57b4ci7jjpoheq48afnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALyloGZV9YvSpt_xxTKM3i2cRjoQN-JJY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043389544558-3gd3rkh1og0a57b4ci7jjpoheq48afnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

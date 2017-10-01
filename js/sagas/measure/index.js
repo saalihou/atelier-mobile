@@ -1,11 +1,15 @@
-import { takeEvery } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { ToastAndroid } from 'react-native';
 
-import { Types } from '../../actions/measure';
+import { Types, Measure, measureSaved } from '../../actions/measure';
+import getUserId from '../utils/getUserId';
+import { push } from '../utils/db';
 
-function* saveMeasure(action) {
-  yield delay(1000);
-  console.log('saveMeasure', action);
+function* saveMeasure(action: { measure: Measure }) {
+  const userId = yield call(getUserId);
+  yield call(push, `measures/${userId}`, action.measure);
+  yield put(measureSaved());
+  yield call(ToastAndroid.show, 'Enregistré', ToastAndroid.SHORT);
 }
 
 export default function* measureSaga() {

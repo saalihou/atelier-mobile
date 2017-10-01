@@ -133,6 +133,16 @@ android {
 }
 
 dependencies {
+    compile (project(':react-native-device-info')) {
+        exclude(group: 'com.google.android.gms', module: 'play-services-gcm')
+    }
+    compile 'com.google.android.gms:play-services-gcm:11.2.0'
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
+    compile "com.google.firebase:firebase-core:11.2.0"
+    compile "com.google.firebase:firebase-auth:11.2.0"
+    compile "com.google.firebase:firebase-database:11.2.0"
     compile project(':react-native-fs')
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-contacts')
@@ -149,3 +159,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
