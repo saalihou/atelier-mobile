@@ -1,5 +1,9 @@
 {
   "PRIMARY": "white",
-  "PRIMARY_FOREGROUND": "darkgrey",
-  "ACCENT": "#F14232"
+  "PRIMARY_FOREGROUND": "#424242",
+  "ACCENT": "#F14232",
+  "ACCENT_FADED": "rgba(241, 66, 50, 0.5)",
+  "ACCENT_DARK": "#B51B0D",
+  "DANGER": "#F9A825",
+  "INACTIVE": "#B1B1B1"
 }
