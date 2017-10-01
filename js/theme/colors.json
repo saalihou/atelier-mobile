@@ -1,7 +1,9 @@
 {
   "PRIMARY": "white",
+  "PRIMARY_DIM": "#DDD",
   "PRIMARY_FOREGROUND": "#424242",
   "ACCENT": "#F14232",
+  "TRANSPARENT_ACCENT": "rgba(241,66,50,0.3)",
   "ACCENT_FADED": "rgba(241, 66, 50, 0.5)",
   "ACCENT_DARK": "#B51B0D",
   "DANGER": "#F9A825",
